@@ -1,5 +1,3 @@
-# camilladsp-EQ-comp-GUI
-camilladsp parametric EQ / compressor / gain GUI in real-time use in parallel with camillagui with no gliches
 
 # CamillaDSP Pro Master Console 🎛️
 
@@ -20,8 +18,8 @@ Para ejecutar esta aplicación, necesitas tener instalado Python 3.8 o superior,
 
 ```bash
 pip install PySide6 camilladsp
-
 (Nota: Asegúrate de tener CamillaDSP ejecutándose en tu servidor local o remoto, y que el puerto WebSocket esté habilitado en su configuración).
+
 
 ⚙️ Instalación y Ejecución
 Clona o descarga este repositorio en tu máquina local.
