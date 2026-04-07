@@ -1,6 +1,6 @@
-### 3. `manual-de-usuario.md`
+### manual-de-usuario
 
-## === BARRA SUPERIOR Y CANALES ===
+# === BARRA SUPERIOR Y CANALES ===
 
 Botones IN / OUT: Seleccionan qué canales visualizar. Además, dictan sobre qué canales se aplicarán los nuevos filtros que crees o sobre cuáles actuará el botón de Bypass.
 
