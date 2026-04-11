@@ -11,7 +11,7 @@
 #    bash install_camilladsp.sh --dir /ruta  # directorio personalizado
 # ==============================================================
 
-set -eo pipefail
+set -e
 
 SCRIPT_VERSION="1.0.0"
 
