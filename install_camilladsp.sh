@@ -1465,8 +1465,12 @@ main() {
   ENGINE_OK=0
   GUI_OK=0
 
-  [ "$DO_ENGINE" = "1" ] && install_engine && ENGINE_OK=1 || true
-  [ "$DO_GUI"    = "1" ] && install_gui    && GUI_OK=1    || true
+  echo "[DEBUG] DO_ENGINE=$DO_ENGINE DO_GUI=$DO_GUI"
+  
+  [ "$DO_ENGINE" = "1" ] && { install_engine && ENGINE_OK=1 || { log_error "Engine falló con código: $?"; }; }
+  [ "$DO_GUI"    = "1" ] && { install_gui    && GUI_OK=1    || { log_error "GUI falló con código: $?"; }; }
+
+  echo "[DEBUG] ENGINE_OK=$ENGINE_OK GUI_OK=$GUI_OK"
 
   if [ "$ENGINE_OK" = "0" ] && [ "$GUI_OK" = "0" ] && \
      [ "$DO_ENGINE" = "1" ] && [ "$DO_GUI" = "1" ]; then
