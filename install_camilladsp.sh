@@ -437,6 +437,12 @@ install_engine() {
     return 1
   }
 
+  local engine_dir="${INSTALL_BASE}/engine"
+  [ -d "$engine_dir" ] && {
+    log_info "Limpiando instalación previa del engine..."
+    rm -rf "$engine_dir"
+  }
+
   log_info "Consultando GitHub para la última versión del engine..."
   github_api_get "$CAMILLADSP_REPO" || return 1
 
@@ -553,6 +559,12 @@ EOF
 install_gui() {
   log_step "CamillaDSP GUI (Backend + Frontend)"
 
+  local gui_dir="${INSTALL_BASE}/gui"
+  [ -d "$gui_dir" ] && {
+    log_info "Limpiando instalación previa de la GUI..."
+    rm -rf "$gui_dir"
+  }
+
   # Verificar Python
   local python_exec=""
   for cmd in python3 python; do
@@ -630,7 +642,6 @@ install_gui() {
   fi
 
   # Instalar archivos
-  [ -d "$gui_dir" ] && rm -rf "$gui_dir"
   cp -r "$src_dir" "$gui_dir"
 
   # Si usamos zipball, intentar descargar el frontend por separado
