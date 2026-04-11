@@ -1497,16 +1497,14 @@ main() {
   # ── Iniciar servicios ─────────────────────────────────────
   if [ "$ENGINE_OK" = "1" ] || [ "$GUI_OK" = "1" ]; then
     echo ""
-    if ask "¿Iniciar los servicios ahora?" "s"; then
-      bash "${INSTALL_BASE}/scripts/start_all.sh"
-      log_info "Esperando que los servicios inicien..."
-      sleep 4
-      if is_port_open "$GUI_HTTP_PORT"; then
-        log_ok "GUI disponible  →  http://localhost:${GUI_HTTP_PORT}"
-      else
-        log_warn "La GUI aún no responde. Puede tardar unos segundos más."
-        log_info "Intenta abrir: http://localhost:${GUI_HTTP_PORT}"
-      fi
+    bash "${INSTALL_BASE}/scripts/start_all.sh"
+    log_info "Esperando que los servicios inicien..."
+    sleep 4
+    if is_port_open "$GUI_HTTP_PORT"; then
+      log_ok "GUI disponible  →  http://localhost:${GUI_HTTP_PORT}"
+    else
+      log_warn "La GUI aún no responde. Puede tardar unos segundos más."
+      log_info "Intenta abrir: http://localhost:${GUI_HTTP_PORT}"
     fi
   fi
 
@@ -1517,11 +1515,11 @@ main() {
   echo ""
   hr
   echo -e "\n  ${GREEN}${BOLD}✔  Instalación completada${RESET}\n"
+  echo -e "  ${GREEN}Todo listo. Abre en tu navegador:${RESET}"
+  echo -e "\n  ${CYAN}  →  http://localhost:${GUI_HTTP_PORT}${RESET}\n"
   echo -e "  Directorio: ${BOLD}${INSTALL_BASE}${RESET}"
-  echo -e "  Interfaz:   ${CYAN}http://localhost:${GUI_HTTP_PORT}${RESET}"
   echo -e "  Docs:       ${BOLD}$(pwd)/README_INSTALACION.md${RESET}"
-  echo -e "  Iniciar:    ${INSTALL_BASE}/scripts/start_all.sh"
-  echo -e "  Parar:      ${INSTALL_BASE}/scripts/stop_all.sh"
+  echo -e "  Detener:    ${INSTALL_BASE}/scripts/stop_all.sh"
   echo ""
 }
 
