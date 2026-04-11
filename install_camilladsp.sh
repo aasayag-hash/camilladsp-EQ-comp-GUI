@@ -15,6 +15,9 @@ set -euo pipefail
 
 SCRIPT_VERSION="1.0.0"
 
+# ── Variables globales ───────────────────────────────────────────
+FOUND_ASSET=""
+
 # ── Repositorios GitHub ───────────────────────────────────────
 CAMILLADSP_REPO="HEnquist/camilladsp"
 CAMILLAGUI_REPO="HEnquist/camillagui-backend"
