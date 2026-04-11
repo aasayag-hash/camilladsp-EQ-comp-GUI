@@ -306,9 +306,12 @@ GUI=/home/user/camilladsp/gui/camillagui_backend
 start_svc() {
   local name=$1; shift
   local pid_file=$PIDS/$name.pid
-  [ -f $pid_file ] && kill -0 $(cat $pid_file) 2>/dev/null && return
-  "$@" >> $LOGS/$name.log 2>&1 &
+  [ -f $pid_file ] && kill $(cat $pid_file) 2>/dev/null
+  sleep 1
+  [ -f $pid_file ] && kill -0 $(cat $pid_file) 2>/dev/null && kill -9 $(cat $pid_file) 2>/dev/null
+  setsid "$@" >> $LOGS/$name.log 2>&1 &
   echo $! > $pid_file
+  sleep 1
   echo "  [OK] $name iniciado (PID $!)"
 }
 
