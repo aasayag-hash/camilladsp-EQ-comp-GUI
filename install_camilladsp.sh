@@ -406,6 +406,14 @@ main() {
   log_info "Sistema: $(uname -s) $(uname -m)"
   log_info "Directorio: ${INSTALL_BASE}"
 
+  if [ "$ARG_UPDATE" = "1" ]; then
+    log_step "Modo actualización"
+    if [ -f "${INSTALL_BASE}/scripts/stop_all.sh" ]; then
+      bash "${INSTALL_BASE}/scripts/stop_all.sh" 2>/dev/null
+      log_info "Servicios detenidos"
+    fi
+  fi
+
   # Instalar engine
   log_step "Instalando Engine..."
   install_engine
@@ -421,22 +429,31 @@ main() {
     exit 1
   fi
 
-  # Crear config y scripts
-  create_default_config
-  create_gui_config
+  # Crear config y scripts solo si no es actualización
+  if [ "$ARG_UPDATE" != "1" ]; then
+    create_default_config
+    create_gui_config
+  fi
   create_scripts
 
   # Iniciar servicios
-  log_step "Iniciando servicios..."
-  bash "${INSTALL_BASE}/scripts/start_all.sh"
-  sleep 3
+  if [ "$ARG_NO_SERVICE" != "1" ]; then
+    log_step "Iniciando servicios..."
+    bash "${INSTALL_BASE}/scripts/start_all.sh"
+    sleep 3
+  fi
 
-  echo ""
-  log_ok "Instalación completada"
-  echo ""
-  echo -e "  ${GREEN}Accede a:${RESET}"
-  echo -e "  ${CYAN}  → http://localhost:5005${RESET}"
-  echo ""
+  if [ "$ARG_UPDATE" = "1" ]; then
+    echo ""
+    log_ok "Actualización completada"
+  else
+    echo ""
+    log_ok "Instalación completada"
+    echo ""
+    echo -e "  ${GREEN}Accede a:${RESET}"
+    echo -e "  ${CYAN}  → http://localhost:5005${RESET}"
+    echo ""
+  fi
 }
 
 main "$@"
