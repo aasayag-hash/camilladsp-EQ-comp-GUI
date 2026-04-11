@@ -536,10 +536,10 @@ install_engine() {
 create_default_engine_config() {
   local config_file="$1"
   local device_type="Alsa"
-  local device_name='"hw:0,0"'
+  local device_name='null'
   case "$OS_NAME" in
-    darwin)  device_type="CoreAudio"; device_name='""' ;;
-    windows) device_type="Wasapi";    device_name='""' ;;
+    darwin)  device_type="CoreAudio"; device_name='null' ;;
+    windows) device_type="Wasapi";    device_name='null' ;;
   esac
   cat > "$config_file" << EOF
 ---
@@ -547,18 +547,18 @@ create_default_engine_config() {
 # Documentación: https://github.com/HEnquist/camilladsp
 
 devices:
-  samplerate: 44100
+  samplerate: 48000
   chunksize: 1024
   capture:
     type: ${device_type}
     channels: 2
     device: ${device_name}
-    format: S32LE
+    format: null
   playback:
     type: ${device_type}
     channels: 2
     device: ${device_name}
-    format: S32LE
+    format: null
 
 filters: {}
 pipeline: []
