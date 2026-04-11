@@ -405,7 +405,7 @@ detect_gui_version() {
     "$HOME/.local/share/camillagui"
   )
   for path in "${candidates[@]}"; do
-    if [ -f "${path}/main.py" ]; then
+    if [ -x "${path}/camillagui_backend" ]; then
       INSTALLED_GUI_PATH="$path"
       if [ -f "${path}/VERSION" ]; then
         INSTALLED_GUI_VER=$(cat "${path}/VERSION")
