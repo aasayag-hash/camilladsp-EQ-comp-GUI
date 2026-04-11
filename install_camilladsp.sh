@@ -1449,23 +1449,6 @@ main() {
   if [ "$ARG_UPDATE" = "1" ] && [ "$ENGINE_INSTALLED" = "0" ] && [ "$GUI_INSTALLED" = "0" ]; then
     log_info "No se detectó instalación previa. Se realizará una instalación nueva."
   fi
-  fi
-
-  if detect_gui_version; then
-    log_warn "GUI ya instalada: ${BOLD}v${INSTALLED_GUI_VER}${RESET}  (${INSTALLED_GUI_PATH})"
-    if [ "$ARG_UPDATE" = "0" ]; then
-      ask_choice "¿Qué hacer con la GUI?" \
-        "a:Actualizar a la última versión" \
-        "m:Mantener versión actual"        \
-        "d:Desinstalar solo la GUI"
-      case "$REPLY_CHOICE" in
-        m) DO_GUI=0; log_info "GUI: se mantiene la versión actual." ;;
-        d) rm -rf "${INSTALLED_GUI_PATH}"; log_ok "GUI desinstalada."; DO_GUI=0 ;;
-      esac
-    else
-      log_info "Modo --update: la GUI se actualizará."
-    fi
-  fi
 
   # ── Instalación ───────────────────────────────────────────
   ENGINE_OK=0
