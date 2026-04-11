@@ -752,8 +752,7 @@ create_scripts() {
   local engine_bin="${INSTALL_BASE}/engine/camilladsp"
   local config_file="${INSTALL_BASE}/config/camilladsp.yml"
   local gui_dir="${INSTALL_BASE}/gui"
-  local python_exec="python3"
-  command -v python3 &>/dev/null || python_exec="python"
+  local gui_bin="${gui_dir}/camillagui_backend"
 
   # ── start_all.sh ─────────────────────────────────────────
   cat > "${scripts_dir}/start_all.sh" << SCRIPT
@@ -776,7 +775,7 @@ start_svc() {
 echo "Iniciando CamillaDSP..."
 start_svc engine  "${engine_bin}" "${config_file}" -p ${ENGINE_WS_PORT}
 sleep 1
-cd "${gui_dir}" && start_svc gui  "${python_exec}" "${gui_dir}/main.py"
+start_svc gui  "${gui_bin}" --config "${gui_dir}/config/camillagui.yml"
 echo ""
 echo "  Abre tu navegador en: http://localhost:${GUI_HTTP_PORT}"
 echo "  Logs en: ${logs_dir}/"
