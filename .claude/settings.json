@@ -1,0 +1,10 @@
+{
+  "permissions": {
+    "allow": [
+      "WebFetch(domain:api.github.com)",
+      "Bash(python3 \"c:/Users/lenovo/Downloads/fir python/camilla_python/camilladsp-EQ-comp-GUI/install_camilladsp.py\" --help)",
+      "Bash(python \"c:/Users/lenovo/Downloads/fir python/camilla_python/camilladsp-EQ-comp-GUI/install_camilladsp.py\" --help)",
+      "Bash(python \"c:/Users/lenovo/Downloads/fir python/camilla_python/camilladsp-EQ-comp-GUI/install_camilladsp.py\" --check)"
+    ]
+  }
+}
