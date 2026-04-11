@@ -1486,6 +1486,8 @@ main() {
         d) rm -rf "${INSTALL_BASE}/engine"; log_ok "Engine desinstalado."; DO_ENGINE=0 ;;
       esac
     fi
+  else
+    log_info "No hay engine instalado. Se instalará."
   fi
 
   if detect_gui_version; then
@@ -1503,6 +1505,8 @@ main() {
         d) rm -rf "${INSTALL_BASE}/gui"; log_ok "GUI desinstalada."; DO_GUI=0 ;;
       esac
     fi
+  else
+    log_info "No hay GUI instalada. Se instalará."
   fi
 
   if [ "$ARG_UPDATE" = "1" ] && [ "$ENGINE_INSTALLED" = "0" ] && [ "$GUI_INSTALLED" = "0" ]; then
