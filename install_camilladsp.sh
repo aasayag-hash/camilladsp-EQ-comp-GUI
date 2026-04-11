@@ -1,4 +1,4 @@
-##!/usr/bin/env bash
+#!/usr/bin/env bash
 # ==============================================================
 #  CamillaDSP — Instalador Automático
 #  Engine  +  GUI Backend  +  Frontend
