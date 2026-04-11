@@ -1137,7 +1137,7 @@ La **GUI web** permite configurar y controlar el engine desde cualquier navegado
 
 \`\`\`bash
 # Clonar el repositorio
-git clone https://github.com/tu-usuario/camilladsp-EQ-comp-GUI.git
+git clone https://github.com/aasayag-hash/camilladsp-EQ-comp-GUI.git
 cd camilladsp-EQ-comp-GUI
 
 # Ejecutar el instalador

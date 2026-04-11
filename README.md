@@ -20,7 +20,7 @@ Instalador automático para **CamillaDSP** con interfaz web para ecualización y
 ## Instalación rápida
 
 ```bash
-git clone https://github.com/tu-usuario/camilladsp-EQ-comp-GUI.git
+git clone https://github.com/aasayag-hash/camilladsp-EQ-comp-GUI.git
 cd camilladsp-EQ-comp-GUI
 bash install_camilladsp.sh
 ```
