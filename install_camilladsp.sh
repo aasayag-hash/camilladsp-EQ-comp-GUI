@@ -444,7 +444,7 @@ install_engine() {
   }
 
   log_info "Consultando GitHub para la última versión del engine..."
-  github_api_get "$CAMILLADSP_REPO" || { log_error "GH_JSON: $GH_JSON"; return 1; }
+  github_api_get "$CAMILLADSP_REPO" || return 1
 
   local tag version
   tag=$(json_get "$GH_JSON" "tag_name")
@@ -456,6 +456,11 @@ install_engine() {
   echo "[DEBUG] assets_list: $assets_list"
 
   find_engine_asset "$assets_list" || {
+    log_error "FOUND_ASSET: $FOUND_ASSET"
+    log_error "No se encontró paquete para ${OS_NAME}/${ARCH}."
+    log_error "Descarga manual: https://github.com/HEnquist/camilladsp/releases"
+    return 1
+  }
     log_error "No se encontró paquete para ${OS_NAME}/${ARCH}."
     log_error "Descarga manual: https://github.com/HEnquist/camilladsp/releases"
     return 1
@@ -587,7 +592,7 @@ install_gui() {
   log_info "Python encontrado: ${python_exec} ($($python_exec --version 2>&1))"
 
   log_info "Consultando GitHub para la última versión de la GUI..."
-  github_api_get "$CAMILLAGUI_REPO" || { log_error "GH_JSON: $GH_JSON"; return 1; }
+  github_api_get "$CAMILLAGUI_REPO" || return 1
 
   local tag version
   tag=$(json_get "$GH_JSON" "tag_name")
@@ -601,8 +606,6 @@ install_gui() {
   echo "[DEBUG] GUI assets_list: $assets_list"
 
   local gui_dir="${INSTALL_BASE}/gui"
-
-  # Encontrar el asset del bundle
   local asset_name asset_url use_zipball=0
 
   if find_gui_asset "$assets_list"; then
@@ -1466,13 +1469,9 @@ main() {
   # ── Instalación ───────────────────────────────────────────
   ENGINE_OK=0
   GUI_OK=0
-
-  echo "[DEBUG] DO_ENGINE=$DO_ENGINE DO_GUI=$DO_GUI"
   
-  [ "$DO_ENGINE" = "1" ] && { install_engine && ENGINE_OK=1 || { log_error "Engine falló con código: $?"; }; }
-  [ "$DO_GUI"    = "1" ] && { install_gui    && GUI_OK=1    || { log_error "GUI falló con código: $?"; }; }
-
-  echo "[DEBUG] ENGINE_OK=$ENGINE_OK GUI_OK=$GUI_OK"
+  [ "$DO_ENGINE" = "1" ] && { install_engine && ENGINE_OK=1; }
+  [ "$DO_GUI"    = "1" ] && { install_gui    && GUI_OK=1; }
 
   if [ "$ENGINE_OK" = "0" ] && [ "$GUI_OK" = "0" ] && \
      [ "$DO_ENGINE" = "1" ] && [ "$DO_GUI" = "1" ]; then
