@@ -36,8 +36,8 @@ Esta herramienta proporciona una instalación automatizada y configuración comp
 ### Instalación rápida
 
 ```bash
-git clone https://github.com/aasayag-hash/camilladsp-EQ-comp-GUI.git
-cd camilladsp-EQ-comp-GUI
+git clone https://github.com/aasayag-hash/camilladsp-auto-install-with-back-and-frontend.git
+cd camilladsp-auto-install-with-back-and-frontend
 bash install_camilladsp.sh
 ```
 
